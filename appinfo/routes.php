@@ -52,5 +52,10 @@ return [
 			'url' => '/gateway/matrix',
 			'verb' => 'POST',
 		],
+		[
+			'name' => 'UnifiedPushProvider#gatewayNextcloud',
+			'url' => '/gateway/nextcloud/notifications',
+			'verb' => 'POST',
+		],
 	]
 ];
