@@ -402,4 +402,31 @@ class UnifiedPushProviderController extends Controller {
 				'rejected' => $rejected
 			]);
 	}
+
+	/**
+	 * Nextcloud Gateway
+	 *
+	 * @CORS
+	 * @PublicPage
+	 * @NoCSRFRequired
+	 *
+	 * @return JsonResponse
+	 */
+	public function gatewayNextcloud(){
+		$message = file_get_contents('php://input'));
+		$msg = "[" . urldecode($message) . "]";
+		$msg = preg_replace('/&?notifications\\[[0-9]*\\]=/', ',', $msg);
+		$msg = preg_replace("/,/", "", $msg, 1);
+		$msg_decoded = json_decode($msg, true);
+		$token =  $msg_decoded[0]['pushTokenHash'];
+		$token = str_replace("000000000000000000000000", "-", $token);
+		$rejected = [];
+		if(!$this->_push($token, $message){
+			array_push($rejected, $msg);
+		}
+	
+		return new JSONResponse([
+				'rejected' => $msg
+			]);
+	}
 }
