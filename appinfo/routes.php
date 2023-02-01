@@ -43,6 +43,17 @@ return [
 			'verb' => 'GET',
 		],
 		[
+			'name' => 'UnifiedPushProvider#gatewayUniversalDiscovery',
+			'url' => '/gateway/universal/{baseEncoded}',
+			'verb' => 'GET',
+		],
+		[
+			'name' => 'UnifiedPushProvider#gatewayUniversal',
+			'url' => '/gateway/universal/{baseEncoded}',
+			'verb' => 'POST',
+			'requirements' => array('baseEncoded' => '.*'),
+		],
+		[
 			'name' => 'UnifiedPushProvider#gatewayMatrixDiscovery',
 			'url' => '/gateway/matrix',
 			'verb' => 'GET',
