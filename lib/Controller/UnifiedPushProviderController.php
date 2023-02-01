@@ -358,6 +358,50 @@ class UnifiedPushProviderController extends Controller {
 	/**
 	 * GATEWAYS
 	 */
+	
+	/**
+	 * Universal Gateway discovery
+	 *
+	 * @CORS
+	 * @PublicPage
+	 * @NoCSRFRequired
+	 *
+	 * @return JsonResponse
+	 */
+	public function gatewayUniversalDiscovery($baseEncoded){
+		return new JSONResponse([
+				'unifiedpush' => [
+					'gateway' => 'universal'
+				]
+			]);
+	}
+
+	/**
+	 * Universal Gateway
+	 *
+	 * @CORS
+	 * @PublicPage
+	 * @NoCSRFRequired
+	 *
+	 * @return JsonResponse
+	 */
+	public function gatewayUniversal($baseEncoded){
+		$message = file_get_contents('php://input');
+		$rejected = [];
+		try {
+			$baseDecoded = base64_decode(current(explode('/', $baseEncoded)));
+			$exploded_baseDecoded = explode('/', $baseDecoded);
+			$token = end($exploded_baseDecoded);
+			if(!$this->_push($token, $message)){
+				array_push($rejected, $baseDecoded);
+			}
+		} catch (\Exception|\Throwable $e) {
+			array_push($rejected, "Invalid base64 provided: " . $baseEncoded);
+		}
+		return new JSONResponse([
+			'rejected' => $rejected
+		]);
+	}
 
 	/**
 	 * Matrix Gateway discovery
