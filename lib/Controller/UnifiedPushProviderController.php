@@ -360,7 +360,7 @@ class UnifiedPushProviderController extends Controller {
 	 */
 	
 	/**
-	 * Universal Gateway discovery
+	 * General Gateway discovery
 	 *
 	 * @CORS
 	 * @PublicPage
@@ -368,16 +368,16 @@ class UnifiedPushProviderController extends Controller {
 	 *
 	 * @return JsonResponse
 	 */
-	public function gatewayUniversalDiscovery($baseEncoded){
+	public function gatewayGeneralDiscovery($baseEncoded){
 		return new JSONResponse([
 				'unifiedpush' => [
-					'gateway' => 'universal'
+					'gateway' => 'general'
 				]
 			]);
 	}
 
 	/**
-	 * Universal Gateway
+	 * General Gateway
 	 *
 	 * @CORS
 	 * @PublicPage
@@ -385,7 +385,7 @@ class UnifiedPushProviderController extends Controller {
 	 *
 	 * @return JsonResponse
 	 */
-	public function gatewayUniversal($baseEncoded){
+	public function gatewayGeneral($baseEncoded){
 		$message = file_get_contents('php://input');
 		$rejected = [];
 		try {

@@ -58,22 +58,22 @@ _Apache_: - VirtalHost Block
 ProxyPass "/_matrix/push/v1/notify" http://127.0.0.1:5000/index.php/apps/uppush/gateway/matrix
 ```
 
-### Universal
-The app can act as a universal gateway for applications with limited support for UnifiedPush. This is the case where an url can be registered on the app server but may be extended with things like `/notifications`.
-Here your UnifiedPush endpoint can be posted to a gateway at `{somehost}/gateway/universal/{baseEncoded}.*` The gateway will then ignore the appended part and extract your token from the base64 encoded part.
+### General
+The app can act as a general gateway for applications with limited support for UnifiedPush. This is the case where an url can be registered on the app server but may be extended with things like `/notifications`.
+Here your UnifiedPush endpoint can be posted to a gateway at `{somehost}/gateway/general/{baseEncoded}/.*` The gateway will then ignore the appended part and extract your token from the base64 encoded part.
 
 [See examples of reverse-proxy conf](reverse_proxy_examples)
 
 _Nginx_: - Server Block
 ```
-location /gateway/universal {
-    proxy_pass http://127.0.0.1:5000/index.php/apps/uppush/gateway/universal;
+location /gateway/general {
+    proxy_pass http://127.0.0.1:5000/index.php/apps/uppush/gateway/general;
 }
 ```
 
 _Apache_: - VirtalHost Block
 ```
-ProxyPass "/gateway/universal" http://127.0.0.1:5000/index.php/apps/uppush/gateway/universal
+ProxyPass "/gateway/general" http://127.0.0.1:5000/index.php/apps/uppush/gateway/general
 ```
 
 ## Development
